@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import Survey from './Survey.jsx'
 
 export default function App() {
+  const [view, setView] = useState('home')
   const [roster, setRoster] = useState(null)
   const [groups, setGroups] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [groupSize, setGroupSize] = useState(4)
 
   useEffect(() => {
     fetch('/api/roster')
@@ -23,7 +26,7 @@ export default function App() {
       const res = await fetch('/api/groups/randomize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ group_size: 4 }),
+        body: JSON.stringify({ group_size: groupSize }),
       })
       if (!res.ok) throw new Error(`Backend responded ${res.status}`)
       const data = await res.json()
@@ -55,14 +58,36 @@ export default function App() {
     )
   }
 
+  if (view === 'survey') {
+    return <Survey roster={roster} onBack={() => setView('home')} />
+  }
+
   return (
     <main className="page">
       <h1>GroupMaker</h1>
       <p className="subtitle">{roster.course}</p>
 
-      <button className="randomize" onClick={randomize} disabled={loading}>
-        {loading ? 'Randomizing…' : 'Randomize Groups'}
+      <button type="button" className="link-button" onClick={() => setView('survey')}>
+        Survey →
       </button>
+
+      <div className="controls">
+        <label className="group-size">
+          Group size
+          <select
+            value={groupSize}
+            onChange={(e) => setGroupSize(Number(e.target.value))}
+            disabled={loading}
+          >
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
+        </label>
+        <button className="randomize" onClick={randomize} disabled={loading}>
+          {loading ? 'Randomizing…' : 'Randomize Groups'}
+        </button>
+      </div>
 
       {groups ? (
         <section className="groups">

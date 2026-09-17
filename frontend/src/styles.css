@@ -23,6 +23,29 @@ h1 {
   margin-top: 0;
 }
 
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.group-size {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.group-size select {
+  font-size: 1rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #d0d0dc;
+  border-radius: 8px;
+  background: white;
+}
+
 .randomize {
   font-size: 1rem;
   padding: 0.6rem 1.2rem;
@@ -31,7 +54,6 @@ h1 {
   background: #4f46e5;
   color: white;
   cursor: pointer;
-  margin: 1rem 0 1.5rem;
 }
 
 .randomize:disabled {
@@ -73,6 +95,48 @@ h1 {
 
 .error {
   color: #b3261e;
+}
+
+.success {
+  color: #1b5e20;
+}
+
+.link-button {
+  font-size: 0.95rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4f46e5;
+  cursor: pointer;
+  margin: 0.5rem 0 1rem;
+}
+
+.survey-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 520px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.field select,
+.field textarea {
+  font-size: 1rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #d0d0dc;
+  border-radius: 8px;
+  background: white;
+  font-family: inherit;
+}
+
+.field textarea {
+  resize: vertical;
 }
 
 @media (max-width: 640px) {
